@@ -1,6 +1,9 @@
+from dotenv import load_dotenv
 from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
+
+load_dotenv()
 
 DATABASE_URL = getenv("DATABASE_URL")
 
@@ -16,3 +19,8 @@ def get_db():
         yield db
     finally:
         db.close()
+
+def init_db() -> None:
+    from app import models
+
+    Base.metadata.create_all(bind=engine)
