@@ -6,8 +6,6 @@ from typing import List
 class ShortResponseCourse(BaseModel):
     id: int
     name: str
-    description: str
-    ects: int
 
     class Config:
         from_attributes = True
