@@ -58,8 +58,8 @@ def create_professor(professor_info: Professor, db: Session = Depends(get_db)):
     return new_professor
 
 @router.patch("/{professor_id}", response_model=UpdateProfessor, status_code=200)
-def update_professor(professor_data: Professor, db: Session = Depends(get_db)):
-    exist_professor = db.query(Professor).where(Professor.id == professor_data.id).first()
+def update_professor(professor_id: int, professor_data: Professor, db: Session = Depends(get_db)):
+    exist_professor = db.query(Professor).where(Professor.id == professor_id).first()
     if exist_professor is None:
         raise HTTPException(
             status_code=404,
